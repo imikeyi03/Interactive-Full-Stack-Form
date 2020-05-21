@@ -4,9 +4,7 @@
 let jobRoleSelection = document.getElementById('title'); 
 let otherJobOption = document.getElementById('other-title');
 let colorThemeSelection = document.getElementById('color');
-
-
-
+let colorOptions = colorThemeSelection.options;
 
 //Function to focus on the first text field on page load
 
@@ -51,15 +49,21 @@ jobRoleSelection.addEventListener("change", (e) => {
 
 // Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field
 // reads “Please select a T-shirt theme”.
+let optionNode = document.createElement('option');
+let defaultColor = document.createTextNode('Please select a T-shirt theme');
+optionNode.appendChild(defaultColor);
+document.getElementById('color').prepend(optionNode)
 
-function watchColor(color) {
-    for(let i = 0; i < color.length; i++) {
-        color[i].hidden = true;
+
+for(let i = 0; i < colorOptions.length; i++ ) {
+    
+    if(colorOptions[i].value === "Please select a T-shirt theme" ) {
+        colorOptions[i].hidden = false;
+    } else {
+        colorOptions[i].hidden = true;
     }
-    color += document.createElement('option');
-    color += document.createTextNode("Please select a T-shirt theme")
-    console.log(color);
 }
+ 
 
 
 
@@ -96,4 +100,3 @@ function watchColor(color) {
 
 
 hideAltJobInput();
-watchColor(colorThemeSelection);
