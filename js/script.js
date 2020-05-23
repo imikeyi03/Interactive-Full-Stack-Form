@@ -1,12 +1,6 @@
 'use strict'
-
-// GLOBAL VARIABLES
 let jobRoleSelection = document.getElementById('title'); 
 let otherJobOption = document.getElementById('other-title');
-let colorThemeSelection = document.getElementById('color');
-let colorOptions = colorThemeSelection.options;
-let designSelection = document.getElementById('design');
-
 //Function to focus on the first text field on page load
 
 //wait until page load event has fired
@@ -40,7 +34,15 @@ jobRoleSelection.addEventListener('change', (e) => {
 
 
 
-// T-Shirt Info section
+/***********************************
+//T-SHIRT INFO
+***********************************/
+
+// GLOBAL T-SHIRT VARIABLES
+let colorThemeSelection = document.getElementById('color');
+let colorOptions = colorThemeSelection.options;
+let designSelection = document.getElementById('design');
+
 
 // Until a theme is selected from the “Design” menu, no color options appear in the “Color” drop down and the “Color” field
 // reads “Please select a T-shirt theme”.
@@ -112,6 +114,11 @@ designSelection.addEventListener('change', (event) => {
 //Selects all checkboxes in the activities section
 const checkboxes = document.querySelectorAll('.activities input');
 
+let totalCost = 0;
+let h3 = document.createElement('h3');
+h3.innerHTML = "Total: $" + totalCost;
+let activitiesDOM = document.querySelector('.activities');
+activitiesDOM.appendChild(h3);
 
 //Event listener for any changes in the activites checkboxes
 document.querySelector('.activities').addEventListener('change', (e) => {
@@ -120,10 +127,16 @@ document.querySelector('.activities').addEventListener('change', (e) => {
     const selectedCheckbox = e.target;
     //Variable to hold selectedCheckbox Day
     const selectedCheckboxTime = selectedCheckbox.getAttribute('data-day-and-time');
-    console.log(selectedCheckboxTime);
     //Variable to hold selectedCheckbox cost
     const selectedCheckboxCost = selectedCheckbox.getAttribute('data-cost');
-    console.log(selectedCheckboxCost);
+
+    if(selectedCheckbox.checked) {
+        totalCost += parseInt(selectedCheckboxCost);
+        console.log(totalCost);
+    } else {
+        totalCost -= parseInt(selectedCheckboxCost);
+        console.log(totalCost);
+    }
 
 
 
