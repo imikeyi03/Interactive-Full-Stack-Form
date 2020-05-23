@@ -90,7 +90,6 @@ designSelection.addEventListener('change', (event) => {
             
         for (let i = 0; i < colorOptions.length; i++) {
             if (i > 3 && i <=6) {
-                console.log(colorOptions[i])
                 colorOptions[i].hidden = '';
                 colorOptions[4].selected = true;
             } else {
@@ -110,6 +109,41 @@ designSelection.addEventListener('change', (event) => {
 ***********************************/
 
 
+//Selects all checkboxes in the activities section
+const checkboxes = document.querySelectorAll('.activities input');
+
+
+//Event listener for any changes in the activites checkboxes
+document.querySelector('.activities').addEventListener('change', (e) => {
+
+    //Variable to hold current selected checkbox
+    const selectedCheckbox = e.target;
+    //Variable to hold selectedCheckbox Day
+    const selectedCheckboxTime = selectedCheckbox.getAttribute('data-day-and-time');
+    console.log(selectedCheckboxTime);
+    //Variable to hold selectedCheckbox cost
+    const selectedCheckboxCost = selectedCheckbox.getAttribute('data-cost');
+    console.log(selectedCheckboxCost);
+
+
+
+    for (let i = 0; i < checkboxes.length; i++) {
+        
+        const checkboxTime = checkboxes[i].getAttribute('data-day-and-time');
+        
+        if(selectedCheckboxTime == checkboxTime && selectedCheckbox !== checkboxes[i]) {
+           
+            if (selectedCheckbox.checked) {
+                checkboxes[i].disabled = true;
+            } else {
+            checkboxes[i].disabled = false;
+             }
+        }
+
+    }
+
+
+});
 
 
 
