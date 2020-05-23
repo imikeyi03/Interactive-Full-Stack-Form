@@ -69,18 +69,19 @@ designSelection.options[0].selected = true;
 designSelection.addEventListener('change', (event) => {
     
     //hide default params
-    colorOptions[0].hidden = true;
     designSelection.options[0].hidden = true;
-
+    colorOptions[0].hidden = true;
  //if the chosen value is js puns, only show top three indexes
         if(jsPun.selected == true) {
             
             for (let i = 0; i < colorOptions.length; i++) {
                 if (i > 0 && i <=3) {
                     colorOptions[i].hidden = '';
+                    colorOptions[1].selected = true;
                 } else {
                     colorOptions[i].hidden = true;
                 }
+
             }
         }
 
@@ -89,17 +90,24 @@ designSelection.addEventListener('change', (event) => {
             
         for (let i = 0; i < colorOptions.length; i++) {
             if (i > 3 && i <=6) {
+                console.log(colorOptions[i])
                 colorOptions[i].hidden = '';
+                colorOptions[4].selected = true;
             } else {
                 colorOptions[i].hidden = true;
+                
             }
         }    
     }
+
 });
 
 
 
 
+/***********************************
+//REGISTER FOR ACTIVITIES 
+***********************************/
 
 
 
