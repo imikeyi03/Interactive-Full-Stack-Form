@@ -161,9 +161,44 @@ document.querySelector('.activities').addEventListener('change', (e) => {
 
 
 
+/***********************************
+//PAYMENT INFO SECTION
+***********************************/
+let paymentTypes = document.querySelectorAll('#payment option');
+let creditCardDiv = document.querySelector('#credit-card');
+let paypalDiv = document.querySelector('#paypal');
+let bitcoinDiv = document.querySelector('#bitcoin');
+paymentTypes[0].hidden = true;
+paymentTypes[1].selected = true;
+
+document.querySelector('#payment').addEventListener('change',(e) => {
+    
+   if(paymentTypes[1].selected == true) {
+       console.log('credit card selected');
+       creditCardDiv.hidden = false;
+       paypalDiv.hidden = true;
+       bitcoinDiv.hidden = true;
+   }
+
+   if(paymentTypes[2].selected == true) {
+    console.log('paypal selected');
+    creditCardDiv.hidden = true;
+    paypalDiv.hidden = false;
+    bitcoinDiv.hidden = true;
+    }
+
+      
+   if(paymentTypes[3].selected == true) {
+    console.log('Bitcoin selected');
+    creditCardDiv.hidden = true;
+    paypalDiv.hidden = true;
+    bitcoinDiv.hidden = false;
+    }
 
 
-
+    
+   
+});
 
 
 
