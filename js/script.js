@@ -202,4 +202,108 @@ document.querySelector('#payment').addEventListener('change',(e) => {
 
 
 
+
+
+/***********************************
+//FORM VALIDATION
+***********************************/
+
+
+
+const submitButton = document.getElementById('js-submit-btn');
+const userName = document.querySelector('#name');
+const userEmail = document.querySelector('#mail');
+
+submitButton.addEventListener('click', (e) => {
+    
+    checkName();
+    checkEmail();
+    checkActivity()
+    checkCreditCard()
+    checkZipCode()
+    checkCVV()
+    e.preventDefault();
+    
+
+
+
+
+
+});
+
+
+//If the name field is blank, throw an error
+
+function checkName() {
+    
+    const name = userName.value;
+    const regex = /^[A-Za-z]+\s?[A-Za-z]+$/
+    const match = regex.test(name);
+
+    if (match == true) {
+        console.log('valid name :)');
+    } else {
+        console.log('incorrect name');
+    }
+    
+
+}
+
+//Email input must have an @ symbol and a ., if not , throw and error
+
+function checkEmail() {
+    const email = userEmail.value
+    console.log(email);
+}
+
+
+//User must have at least one activity selected
+function checkActivity() {
+
+    
+}
+
+
+
+//If user is submitting a credit card as payment
+//Check that the credit card field has only 13-16 numerical values
+
+
+function checkCreditCard() {
+
+
+}
+
+
+//Zip code should only have numerical values
+function checkZipCode() {
+
+    
+}
+
+//CVV should only contain 3 number values
+function checkCVV() {
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 hideAltJobInput();
