@@ -174,14 +174,12 @@ paymentTypes[1].selected = true;
 document.querySelector('#payment').addEventListener('change',(e) => {
     
    if(paymentTypes[1].selected == true) {
-       console.log('credit card selected');
        creditCardDiv.hidden = false;
        paypalDiv.hidden = true;
        bitcoinDiv.hidden = true;
    }
 
    if(paymentTypes[2].selected == true) {
-    console.log('paypal selected');
     creditCardDiv.hidden = true;
     paypalDiv.hidden = false;
     bitcoinDiv.hidden = true;
@@ -189,7 +187,6 @@ document.querySelector('#payment').addEventListener('change',(e) => {
 
       
    if(paymentTypes[3].selected == true) {
-    console.log('Bitcoin selected');
     creditCardDiv.hidden = true;
     paypalDiv.hidden = true;
     bitcoinDiv.hidden = false;
@@ -209,27 +206,56 @@ document.querySelector('#payment').addEventListener('change',(e) => {
 ***********************************/
 
 
-
+const jsForm = document.querySelector('#js-form');
 const submitButton = document.getElementById('js-submit-btn');
 const userName = document.querySelector('#name');
 const userEmail = document.querySelector('#mail');
+const userCreditCardNum = document.querySelector('#cc-num');
+const userZipCode = document.querySelector('#zip');
+const userCVV = document.querySelector('#cvv');
 
-submitButton.addEventListener('click', (e) => {
-    
+jsForm.addEventListener('submit', (e) => {
+    checkValidation();
+
+    if(checkValidation() == true) {
+        e.preventDefault();
+        alert('Form submitted!');
+    } else {
+        e.preventDefault();
+    }
+
+});
+
+
+
+
+function checkValidation() {
     checkName();
     checkEmail();
     checkActivity()
-    checkCreditCard()
-    checkZipCode()
-    checkCVV()
-    e.preventDefault();
+
+    if(paymentTypes[1].selected == true) {
+        checkCreditCard()
+        checkZipCode()
+        checkCVV()
+    }
+
+    
+    
+    if (checkName() == true && checkEmail() == true && checkActivity() == true && paymentTypes[1].selected == false) {
+        
+            if (checkName() == true && checkEmail() == true && checkActivity() == true && checkCreditCard() == true && checkZipCode() == true && checkCVV() == true ) {
+                return true;
+            } 
+        return true
+
+    } else {
+        return false;
+    }
     
 
 
-
-
-
-});
+}
 
 
 //If the name field is blank, throw an error
@@ -237,13 +263,16 @@ submitButton.addEventListener('click', (e) => {
 function checkName() {
     
     const name = userName.value;
-    const regex = /^[A-Za-z]+\s?[A-Za-z]+$/
+    const regex = /^[A-Za-z]+\s?[A-Za-z]+$/;
     const match = regex.test(name);
 
     if (match == true) {
-        console.log('valid name :)');
+        userName.style.border = "2px solid rgb(111, 157, 220)";
+        return true;
     } else {
-        console.log('incorrect name');
+        userName.style.border = "2px solid red";
+        return false;
+       
     }
     
 
@@ -252,14 +281,31 @@ function checkName() {
 //Email input must have an @ symbol and a ., if not , throw and error
 
 function checkEmail() {
-    const email = userEmail.value
-    console.log(email);
+    const email = userEmail.value;
+    const regex = /^[^@]+@[^@.]+\.[a-z]+$/;
+    const match = regex.test(email);
+    
+    if (match == true) {
+        userEmail.style.border = "2px solid rgb(111, 157, 220)";
+        return true;
+    } else {
+        userEmail.style.border = "2px solid red";
+        return false;
+    }
+
 }
 
 
 //User must have at least one activity selected
 function checkActivity() {
 
+    if (totalCost > 0 ) {
+        activitiesDOM.style.border = "none";
+        return true;
+    } else {
+        activitiesDOM.style.border = "2px solid red";
+        return false;
+    } 
     
 }
 
@@ -271,6 +317,17 @@ function checkActivity() {
 
 function checkCreditCard() {
 
+    const cardNum = userCreditCardNum.value;
+    const regex = /^[0-9]{13,16}$/;
+    const match = regex.test(cardNum);
+    
+    if (match == true) {
+        userCreditCardNum.style.border = "2px solid rgb(111, 157, 220)";
+        return true;
+    } else {
+        userCreditCardNum.style.border = "2px solid red";
+        return false;
+    }
 
 }
 
@@ -278,12 +335,34 @@ function checkCreditCard() {
 //Zip code should only have numerical values
 function checkZipCode() {
 
+    const zipCode = userZipCode.value;
+    const regex = /^[0-9]{5}$/;
+    const match = regex.test(zipCode);
+    
+    if (match == true) {
+        userZipCode.style.border = "2px solid rgb(111, 157, 220)";
+        return true;
+    } else {
+        userZipCode.style.border = "2px solid red";
+        return false;
+    }
     
 }
 
 //CVV should only contain 3 number values
 function checkCVV() {
 
+    const CVVNum = userCVV.value;
+    const regex = /^[0-9]{3}$/;
+    const match = regex.test(CVVNum);
+    
+    if (match == true) {
+        userCVV.style.border = "2px solid rgb(111, 157, 220)";
+        return true;
+    } else {
+        userCVV.style.border = "2px solid red";
+        return false;
+    }
     
 }
 
