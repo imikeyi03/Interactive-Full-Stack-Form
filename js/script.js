@@ -171,6 +171,9 @@ let bitcoinDiv = document.querySelector('#bitcoin');
 paymentTypes[0].hidden = true;
 paymentTypes[1].selected = true;
 
+paypalDiv.hidden = true;
+bitcoinDiv.hidden = true;
+
 document.querySelector('#payment').addEventListener('change',(e) => {
     
    if(paymentTypes[1].selected == true) {
