@@ -221,7 +221,6 @@ jsForm.addEventListener('submit', (e) => {
     checkValidation();
 
     if(checkValidation() == true) {
-        e.preventDefault();
         alert('Form submitted!');
     } else {
         e.preventDefault();
@@ -235,24 +234,24 @@ jsForm.addEventListener('submit', (e) => {
 function checkValidation() {
     checkName();
     checkEmail();
-    checkActivity()
-
-    if(paymentTypes[1].selected == true) {
-        checkCreditCard()
-        checkZipCode()
-        checkCVV()
-    }
+    checkActivity();
+    checkCreditCard();
+    checkZipCode();
+    checkCVV();
 
     
     
     if (checkName() == true && checkEmail() == true && checkActivity() == true && paymentTypes[1].selected == false) {
+
+            return true
+        }
         
-            if (checkName() == true && checkEmail() == true && checkActivity() == true && checkCreditCard() == true && checkZipCode() == true && checkCVV() == true ) {
+            else if  (checkName() == true && checkEmail() == true && checkActivity() == true && checkCreditCard() == true && checkZipCode() == true && checkCVV() == true ) {
                 return true;
             } 
-        return true
+        
 
-    } else {
+     else {
         return false;
     }
     
